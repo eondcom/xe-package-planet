@@ -1,0 +1,80 @@
+<!--%import("js/planet.js")-->
+
+
+<div class="x_page-header">
+	<h1>
+		{$lang->planet} {$lang->cmd_management}
+
+		<span class="path" cond="$module_info->mid">
+			&gt; <a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}" target="_blank"|cond="$module=='admin'">{$module_info->mid}<block cond="$module_info->is_default=='Y'">({$lang->is_default})</block></a>
+		</span>
+		<a href="#aboutModule" data-toggle class="x_icon-question-sign">{$lang->help}</a>
+
+	</h1>
+
+</div>
+<p class="x_alert x_alert-info" id="aboutModule" hidden>{nl2br($lang->about_planet)}</p>
+
+
+<table class="x_table x_table-striped x_table-hover" style="margin-bottom:30px">
+	<caption>
+		<div class="x_pull-right x_btn-group">
+			<a class="x_btn" href="https://github.com/eondcom/xe-module-planet/issues" target="_blank">{$lang->issue}</a>
+			<a class="x_btn" href="https://github.com/eondcom/xe-module-planet" target="_blank">{$lang->github}</a>
+		</div>
+	</caption>
+		<thead>
+			<tr>
+				<th scope="row">{$lang->total_planet}</th>
+				<th scope="row">
+					<span id="str_selected_date">{zdate($selected_date, "Y-m-d")}</span>
+					<input type="hidden" class="inputDate" value="{zdate($selected_date,'Y-m-d')}" />
+					<script>
+					(function($){
+						$(function(){
+							var option = {
+								changeMonth: true
+								,changeYear: true
+								,gotoCurrent: false
+								,dateFormat:'yy-mm-dd'
+								,yearRange:'-100:+10'
+								,showOn:"button"
+								,buttonImage:"./modules/counter/tpl/images/buttonCalendar.gif"
+								,buttonImageOnly:false
+								,mandatory:true
+								,onSelect:function(){
+									$("#str_selected_date").html(this.value);
+									$("#selected_date").val(this.value.replace(/-/g,''));
+									moveDate();
+								}
+							};
+
+							$.extend(option,$.datepicker.regional['{$lang_type}']);
+							$(".inputDate").datepicker(option);
+						});
+					})(jQuery);
+					</script>
+					<style scoped>
+						.ui-datepicker-trigger{cursor:pointer;border:0;background:none;padding:0}
+					</style>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Planet <strong>{number_format($total_count)}</strong> &nbsp;/&nbsp; Article : <strong>{number_format($total_counter->pageview)}</strong></td>
+				<td>Planet : <strong>{number_format($selected_day_counter->unique_visitor)}</strong> &nbsp;/&nbsp; Article : <strong>{number_format($selected_day_counter->pageview)}</strong></td>
+			</tr>
+		</tbody>
+	</table>
+
+<ul class="x_nav x_nav-tabs"><!--  cond="$module_info && $act != 'dispBoardAdminContent' && $act != 'dispBoardAdminDeleteBoard'" -->
+	<li class="x_active"|cond="$act=='dispPlanetAdminSetup'"><a href="{getUrl('act','dispPlanetAdminSetup')}"">{$lang->cmd_planet_setup}</a></li>
+	<li class="x_active"|cond="$act=='dispPlanetAdminList'"><a href="{getUrl('act','dispPlanetAdminList')}"">{$lang->cmd_planet_list}</a></li>
+	<li class="x_active"|cond="$act=='dispPlanetAdminGrantInfo'"><a href="{getUrl('act','dispPlanetAdminGrantInfo')}"">{$lang->cmd_manage_grant}</a></li>
+	<li class="x_active"|cond="$act=='dispPlanetAdminSkinInfo'"><a href="{getUrl('act','dispPlanetAdminSkinInfo')}"">{$lang->cmd_manage_skin}</a></li>
+	<li class="x_active"|cond="$act=='dispPlanetAdminAdditionalSetup'"><a href="{getUrl('act','dispPlanetAdminAdditionalSetup')}"">{$lang->cmd_additional_setup}</a></li>
+</ul>
+
+
+
