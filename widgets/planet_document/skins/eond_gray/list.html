@@ -1,0 +1,21 @@
+<style>
+.pln_eond {border:1px solid #E8E8E8;border-bottom:0;width:228px;background:#F9F9F9;padding:10px;overflow:hidden;font-size:11px;color:#5c5c5c;}
+.pln_eond .nickname {position:relative;font:bold 11px dotum;color:#5F74B3;border:1px solid #B9B9BD;padding:2px 4px 0 4px;background:white;vertical-align:top;}
+.pln_eond .date {position:relative;font:10px verdana;color:#5F74B3;letter-spacing:-1px;margin:0 5px 0 5px;}
+.pln_eond .time {position:relative;font:10px verdana;color:#6F7893;letter-spacing:-1px;}
+</style>
+
+<!--@foreach($planet_list as $no => $item)-->
+<div class="pln_eond">
+	<a href="./planet"><img src="{$item->getPlanetPhotoSrc($widget_info->thumbnail_width,$widget_info->thumbnail_height)}" width="{$widget_info->thumbnail_width}" height="{$widget_info->thumbnail_height}" alt="{htmlspecialchars($item->nick_name)}" style="border:2px solid #E5E5E5;float:left;margin-right:5px;" /></a>
+	
+	
+	<div style="float:left;"><a href="{getSiteUrl($widget_info->domain,'','mid',$item->getPlanetMid(),'date',$item->getRegdate())}"><span class="nickname">{$item->getNickName()}</span></a></div>
+	
+	<div><span class="date">{zdate($item->get('regdate'),"y.m.d",false)}</span><span class="time">({zdate($item->get('regdate'),"H:i",false)})</span></div>
+	<p style="height:3px;"></p>
+	
+
+	<font style="font-size:11px;color:#5c5c5c;">{$item->getContent()}
+</div></font>
+<!--@end-->

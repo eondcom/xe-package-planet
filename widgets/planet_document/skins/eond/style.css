@@ -1,0 +1,18 @@
+.pln_eond {border:1px solid #E8E8E8;background:#F9F9F9;padding:6px;overflow:hidden;font-size:11px;color:#5c5c5c;clear:both;}
+.pln_eond .nickname {font:bold 11px dotum;color:#5F74B3;border:1px solid #B9B9BD;padding:1px 4px 0px 4px;background:white;vertical-align:middle;display:inline-block;margin-top:2px;}
+.pln_eond .date {position:relative;font:10px verdana;color:#5F74B3;letter-spacing:-1px;}
+.pln_eond .time {position:relative;font:10px verdana;color:#6F7893;letter-spacing:-1px;}
+.pln_eond .content div {font-size:11px;color:#5c5c5c;line-height:130%}
+
+.hybrid .ce #body{ padding-right:280px;}
+.hybrid .ec #body{ padding-left:280px;}
+.hybrid .ce #body .e1,
+.hybrid .ec #body .e1{ width:260px;}
+.hybrid .ce #body #content,
+.hybrid .ec #body #content{ width:100%;}
+.hybrid .ce #body #content{ float:left;}
+.hybrid .ec #body #content{ float:right;}
+.hybrid .ce #body .e1,
+.hybrid .ec #body .e1{ display:block;}
+.hybrid .ce #body .e1{ float:right; clear:right; margin-left:-260px; right:-280px;}
+.hybrid .ec #body .e1{ float:left; clear:left; margin-right:-260px; left:-280px;}
