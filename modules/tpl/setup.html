@@ -2,105 +2,160 @@
 <!--%import("filter/insert_config.xml")-->
 
 <form action="./" method="get" onsubmit="return procFilter(this, insert_config)">
-	<table cellspacing="0" class="rowTable" border="1" style="table-layout:fixed">
-	<tr>
-		<th scope="row"><div>{$lang->mid}</div></th>
-		<td colspan="3">
-			<input type="text" name="mid" value="{htmlspecialchars($module_info->mid)}"  class="inputTypeText w400" />
-			<p>{$lang->about_mid}</p>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->browser_title}</div></th>
-		<td colspan="3">
-			<input type="text" name="browser_title" value="{htmlspecialchars($module_info->browser_title)}"  class="inputTypeText w400" />
-			<p>{$lang->about_browser_title}</p>
-		</td>
-	</tr>
-	<tr class="row">
-		<th scope="row"><div>{$lang->layout}</div></th>
-		<td colspan="3">
-			<select name="layout_srl">
-			<option value="0">{$lang->notuse}</option>
-			<!--@foreach($layout_list as $key => $val)-->
-			<option value="{$val->layout_srl}" <!--@if($module_info->layout_srl==$val->layout_srl)-->selected="selected"<!--@end-->>{$val->title} ({$val->layout})</option>
-			<!--@end-->
-			</select>
-			<p>{$lang->about_layout}</p>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->planet_default_skin}</div></th>
-		<td colspan="3">
-			<select name="planet_default_skin">
-				<!--@foreach($skin_list as $key=>$val)-->
-				<option value="{$key}" <!--@if($module_info->planet_default_skin==$key)-->selected="selected"<!--@end-->>{$val->title}</option>
-				<!--@end-->
-			</select>
-			<p>{$lang->about_planet_default_skin}</p>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row"><div>{$lang->create_message}</div></th>
-		<td colspan="3">
-			<textarea name="create_message" class="inputTypeTextArea w400">{htmlspecialchars($module_info->create_message)}</textarea>
-			<p>{$lang->about_create_message}</p>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->planet_tagtab}</div></th>
-		<td colspan="3">
-			<input type="text" name="planet_tagtab" value="{htmlspecialchars($tagtab)}" class="inputTypeText w400" />
-			<p>{$lang->about_planet_tagtab}</p>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->planet_tagtab_after}</div></th>
-		<td colspan="3">
-			<input type="text" name="planet_tagtab_after" value="{htmlspecialchars($tagtab_after)}" class="inputTypeText w400" />
-			<p>{$lang->about_planet_tagtab_after}</p>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row"><div>{$lang->planet_smstag}</div></th>
-		<td colspan="3">
-			<input type="text" name="planet_smstag" value="{htmlspecialchars($smstag)}" class="inputTypeText w400" />
-			<p>{$lang->about_planet_smstag}</p>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->use_signup}</div></th>
-		<td colspan="3">
-			<input type="checkbox" name="use_signup" value="Y" <!--@if($module_info->use_signup=='Y')-->checked="checked"<!--@end--> id="fld_for_signup"  class="checkbox" />
-			<label for="fld_for_signup">{$lang->about_use_signup}</label>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row"><div>{$lang->planet_use_mobile}</div></th>
-		<td colspan="3">
-			<input type="checkbox" name="use_mobile" value="Y" <!--@if($module_info->use_mobile=='Y')-->checked="checked"<!--@end--> id="fld_for_use_mobile"  class="checkbox" />
-			<label for="fld_for_use_mobile">{$lang->about_use_mobile}</label>
-		</td>
-	</tr>
-	<tr class="row2">
-		<th scope="row"><div>{$lang->planet_use_sns}</div></th>
-		<td colspan="3">
-			<input type="checkbox" name="use_facebook" value="Y" <!--@if($module_info->use_facebook=='Y')-->checked="checked"<!--@end--> id="fld_for_use_facebook"  class="checkbox" />
-			<label for="fld_for_use_facebook">{$lang->about_use_facebook}</label>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row"><div>RSS</div></th>
-		<td colspan="3">
-			<input type="checkbox" name="use_rss" value="Y"  <!--@if($module_info->use_rss=='Y')-->checked="checked"<!--@end--> />
-		</td>
-	</tr>
-	<tr>
-		<th class="button" colspan="4">
-			<span class="x_pull-right">
-			<button type="submit" class="x_btn x_btn-primary" accesskey="s">{$lang->cmd_registration}</button>
-			</span>
-		</th>
-	</tr>
-	</table>
+	<section class="section">
+	<h1>{$lang->subtitle_primary}</h1>
+		<div cond="$logged_info->is_admin == 'Y'" class="x_control-group">
+			<label class="x_control-label" for="mid">{$lang->mid}</label>
+			<div class="x_controls">
+				<input type="text" name="mid" id="mid" value="{$module_info->mid}" />
+				<a href="#mid_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="mid_help" class="x_help-block" hidden>{$lang->about_mid}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="lang_browser_title">{$lang->browser_title}</label>
+			<div class="x_controls">
+				<input type="text" name="browser_title" id="browser_title" value="<!--@if(strpos($module_info->browser_title, '$user_lang->') === false)-->{$module_info->browser_title}<!--@else-->{htmlspecialchars($module_info->browser_title)}<!--@end-->" class="lang_code" />
+				<a href="#browser_title_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="browser_title_help" class="x_help-block" hidden>{$lang->about_browser_title}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="layout_srl">{$lang->layout}</label>
+			<div class="x_controls">
+				<select name="layout_srl" id="layout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$layout_list => $key, $val" value="{$val->layout_srl}" selected="selected"|cond="$module_info->layout_srl== $val->layout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+				<a href="#layout_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="layout_help" class="x_help-block" hidden>{$lang->about_layout}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="skin">{$lang->skin}</label>
+			<div class="x_controls">
+				<select name="skin" id="skin" style="width:auto">
+					<option loop="$skin_list=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->skin== $key || (!$module_info->skin && $key=='default')">{$val->title}</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="create_message">{$lang->create_message}</label>
+			<div class="x_controls">
+				<textarea name="create_message">{htmlspecialchars($module_info->create_message)}</textarea>
+				<a href="#create_message_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="create_message_help" class="x_help-block" hidden>{$lang->about_create_message}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="planet_tagtab">{$lang->planet_tagtab}</label>
+			<div class="x_controls">
+				<input type="text" name="planet_tagtab" value="{htmlspecialchars($tagtab)}" />
+				<a href="#planet_tagtab_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="planet_tagtab_help" class="x_help-block" hidden>{$lang->about_planet_tagtab}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="planet_tagtab_after">{$lang->planet_tagtab_after}</label>
+			<div class="x_controls">
+				<input type="text" name="planet_tagtab_after" value="{htmlspecialchars($tagtab_after)}" />
+				<a href="#planet_tagtab_after_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="planet_tagtab_after_help" class="x_help-block" hidden>{$lang->about_planet_tagtab_after}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="planet_smstag">{$lang->planet_smstag}</label>
+			<div class="x_controls">
+				<input type="text" name="planet_smstag" value="{htmlspecialchars($smstag)}" />
+				<a href="#planet_smstag_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="planet_smstag_help" class="x_help-block" hidden>{$lang->about_planet_smstag}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="use_signup">{$lang->use_signup}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="use_signup"><input type="checkbox" name="use_signup" id="use_signup" value="Y" <!--@if($module_info->use_signup=='Y')-->checked="checked"<!--@end--> />
+				<p class="x_help-inline">{$lang->about_use_signup}</p></label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="planet_use_mobile">{$lang->planet_use_mobile}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="planet_use_mobile"><input type="checkbox" name="planet_use_mobile" id="planet_use_mobile" value="Y" <!--@if($module_info->planet_use_mobile=='Y')-->checked="checked"<!--@end--> />
+				<p class="x_help-inline">{$lang->about_use_mobile}</p></label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="planet_use_facebook">{$lang->planet_use_facebook}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="planet_use_facebook"><input type="checkbox" name="planet_use_facebook" value="Y" <!--@if($module_info->planet_use_facebook=='Y')-->checked="checked"<!--@end--> id="planet_use_facebook"  class="checkbox" />
+				<p class="x_help-inline">{$lang->about_use_facebook}</p></label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="use_rss">RSS</label>
+			<div class="x_controls">
+				<label class="x_inline" for="use_rss"><input type="checkbox" name="use_rss" id="use_rss" value="Y"  <!--@if($module_info->use_rss=='Y')-->checked="checked"<!--@end--> /><p class="x_help-inline">RSS를 사용합니다.</p></label>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<h1>{$lang->mobile_settings}</h1>
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->mobile_view}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="use_mobile"><input type="checkbox" name="use_mobile" id="use_mobile" value="Y" checked="checked"|cond="$module_info->use_mobile == 'Y'" /> {$lang->about_mobile_view}</label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mlayout_srl">{$lang->mobile_layout}</label>
+			<div class="x_controls">
+				<select name="mlayout_srl" id="mlayout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$mlayout_list => $key, $val" value="{$val->layout_srl}" selected="selected"|cond="$module_info->mlayout_srl== $val->layout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+				<a href="#mobile_layout_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="mobile_layout_help" class="x_help-block" hidden>{$lang->about_layout}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mskin">{$lang->mobile_skin}</label>
+			<div class="x_controls">
+				<select name="mskin" id="mskin">
+					<option loop="$mskin_list=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->mskin== $key || (!$module_info->skin && $key=='default')">{$val->title}</option>
+				</select>
+				<a href="#mobile_skin_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="mobile_skin_help" class="x_help-block" hidden>{$lang->about_skin}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mobile_list_count">{$lang->list_count}</label>
+			<div class="x_controls">
+				<input type="text" name="mobile_list_count" id="mobile_list_count" value="{$module_info->mobile_list_count?$module_info->mobile_list_count:20}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_list_count}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mobile_search_list_count">{$lang->search_list_count}</label>
+			<div class="x_controls">
+				<input type="text" name="mobile_search_list_count" id="mobile_search_list_count" value="{$module_info->mobile_search_list_count?$module_info->mobile_search_list_count:20}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_search_list_count}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mobile_page_count">{$lang->page_count}</label>
+			<div class="x_controls">
+				<input type="text" name="mobile_page_count" id="mobile_page_count" value="{$module_info->mobile_page_count?$module_info->mobile_page_count:5}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_mobile_page_count}</p>
+			</div>
+		</div>		
+	</section>
+	<div class="x_clearfix btnArea">
+		<div class="x_pull-left">
+			<a href="{getUrl('act', 'dispPlanetAdminSetup')}" type="button" class="x_btn">{$lang->cmd_cancel}</a>
+		</div>
+		<div class="x_pull-right">
+			<button class="x_btn x_btn-primary" type="submit">{$lang->cmd_registration}</button>
+		</div>
+	</div>
 </form>

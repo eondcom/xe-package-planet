@@ -175,8 +175,8 @@
 
 	$lang->planet_use_mobile = 'SMS 연동';
 	$lang->about_use_mobile = '핸드폰 SMS로 글을 작성할 수 있게 합니다.';
-	$lang->planet_use_me2day = '미투데이 연동';
-	$lang->about_use_me2day = '글 작성시 me2day에 보내게 됩니다.';
+	$lang->planet_use_facebook = '페이스북 연동';
+	$lang->about_use_facebook = '글 작성시 페이스북에 보내게 됩니다.';
 
 
 	$lang->msg_search_thisplanet = '이 플래닛에서 검색';

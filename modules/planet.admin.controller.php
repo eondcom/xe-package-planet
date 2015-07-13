@@ -32,7 +32,7 @@
 			$module_info->mid = $args->mid = Context::get('planet_mid');
 			$args->browser_title = Context::get('browser_title');
 			$args->is_default = Context::get('is_default');
-			$args->skin = Context::get('planet_default_skin');
+			$args->skin = Context::get('skin');
 			$args->layout_srl = Context::get('layout_srl');
 
 			$args->module = 'planet';
@@ -52,8 +52,8 @@
 
 			// 그외 정보 처리
 			$module_info->planet_default_skin = Context::get('planet_default_skin');
-			$module_info->use_mobile = Context::get('use_mobile');
-			$module_info->use_me2day = Context::get('use_me2day');
+			$module_info->planet_use_mobile = Context::get('planet_use_mobile');
+			$module_info->planet_use_facebook = Context::get('planet_use_facebook');
 			$module_info->use_rss = Context::get('use_rss');
 
 			$tagtab = explode(',',Context::get('planet_tagtab'));
@@ -85,6 +85,14 @@
 			$module_info->create_message = Context::get('create_message');
 			$module_info->use_signup = Context::get('use_signup');
 			if($module_info->use_signup != 'Y') $module_info->use_signup = 'N';
+
+			// 모바일 설정
+			$module_info->use_mobile = Context::get('use_mobile');
+			$module_info->mlayout_srl = Context::get('mlayout_srl');
+			$module_info->mskin = Context::get('mskin');
+			$module_info->mobile_list_count = Context::get('mobile_list_count');
+			$module_info->mobile_search_list_count = Context::get('mobile_search_list_count');
+			$module_info->mobile_page_count = Context::get('mobile_page_count');
 
 			$oPlanetController = &getController('planet');
 			$oPlanetController->insertPlanetConfig($module_info);
