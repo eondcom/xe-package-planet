@@ -9,7 +9,6 @@
 
 		fuction procMobile(&$oMobile){
 			$prev_date = Context::get('prev_date');
-			if($prev_date) $
 		}
 
 	}

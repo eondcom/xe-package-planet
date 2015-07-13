@@ -9,6 +9,7 @@
 		<param name="browser_title" target="browser_title" />
 		<param name="create_message" target="create_message" />
 		<param name="use_signup" target="use_signup" />
+		<param name="skin" target="skin" />
 		<param name="planet_default_skin" target="planet_default_skin" />
 		<param name="layout_srl" target="layout_srl" />
 		<param name="access" target="access" />
@@ -18,9 +19,15 @@
 		<param name="planet_tagtab" target="planet_tagtab" />
 		<param name="planet_tagtab_after" target="planet_tagtab_after" />
 		<param name="planet_smstag" target="planet_smstag" />
-		<param name="use_mobile" target="use_mobile" />
-		<param name="use_me2day" target="use_me2day" />
+		<param name="planet_use_mobile" target="planet_use_mobile" />
+		<param name="planet_use_facebook" target="planet_use_facebook" />
 		<param name="use_rss" target="use_rss" />
+		<param name="use_mobile" target="use_mobile" />
+		<param name="mlayout_srl" target="mlayout_srl" />
+		<param name="mskin" target="mskin" />
+		<param name="mobile_list_count" target="mobile_list_count" />
+		<param name="mobile_search_list_count" target="mobile_search_list_count" />
+		<param name="mobile_page_count" target="mobile_page_count" />
 	</parameter>
 	<response callback_func="completeInsertConfig">
 		<tag name="error" />
